@@ -45,6 +45,13 @@
                 <p class="description">${news.description}</p>
                 <p class="pubDate">${news.pubDate}</p>
                 <p class="link"><a href="${news.link}" target="_blank">원문 보기</a></p>
+                <form action="/scrap" method="post">
+                    <input type="hidden" name="title" value="${news.title}">
+                    <input type="hidden" name="description" value="${news.description}">
+                    <input type="hidden" name="pubDate" value="${news.pubDate}">
+                    <input type="hidden" name="link" value="${news.link}">
+                    <button type="submit">스크랩</button>
+                </form>
             </td>
         </tr>
     </c:forEach>

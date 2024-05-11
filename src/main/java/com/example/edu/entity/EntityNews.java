@@ -11,6 +11,7 @@ public class EntityNews {
     private String title;
     private String description;
     private String pubDate;
+    @Column(unique = true) // 유니크 제약 조건 설정
     private String link;
 
     public EntityNews() {
