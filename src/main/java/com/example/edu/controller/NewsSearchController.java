@@ -1,6 +1,7 @@
 package com.example.edu.controller;
 
 import com.example.edu.model.NewsInfoVO;
+import com.example.edu.service.NewsSearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +15,7 @@ import java.util.Map;
 public class NewsSearchController{
 
     @Resource(name = "newsSearchService")
-    private newsSearchService newsSearchService;
+    private NewsSearchService newsSearchService;
 
     @RequestMapping(value = "/news")
     public String newsSearchPage() throws Exception {
