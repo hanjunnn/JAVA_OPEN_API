@@ -6,7 +6,7 @@ public class NewsInfoVO {
     private String originallink;
     private String link;
     private String description;
-    private String pubdate;
+    private String pubDate; // pubdate를 pubDate로 변경
 
     public String getLink() {
         return link;
@@ -32,18 +32,18 @@ public class NewsInfoVO {
     public void setTitle(String title) {
         this.title = title;
     }
-    public String getPubdate() {
-        return pubdate;
+    public String getPubDate() { // getPubdate를 getPubDate로 변경
+        return pubDate;
     }
-    public void setPubdate(String pubdate) {
-        this.pubdate = pubdate;
+    public void setPubDate(String pubDate) { // setPubdate를 setPubDate로 변경
+        this.pubDate = pubDate;
     }
 
     public String toString() {
         return "NewsInfoVO [link=" + link + ", description=" + description + ", title=" + title
-                + ", originallink=" + originallink + ", pubdate=" + pubdate + ", getLink()=" + getLink()
+                + ", originallink=" + originallink + ", pubDate=" + pubDate + ", getLink()=" + getLink()
                 + ", getDescription()=" + getDescription() + ", getOriginallink()=" + getOriginallink()
-                + ", getTitle()=" + getTitle() + ", getPubdate()=" + getPubdate() + ", getClass()=" + getClass()
+                + ", getTitle()=" + getTitle() + ", getPubDate()=" + getPubDate() + ", getClass()=" + getClass()
                 + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
     }
 }

@@ -33,13 +33,13 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${news.items}" var="item">
+    <c:forEach items="${newss}" var="news">
         <tr>
-            <td><c:out value="${item.title}"/> </td>
-            <td><c:out value="${item.originallink}"/> </td>
-            <td><a href="<c:out value='${item.link}'/>" target="_blank">원문 보기</a></td>
-            <td><c:out value="${item.description}"/> </td>
-            <td><c:out value="${item.pubDate}"/> </td>
+            <td><c:out value="${news.title}"/> </td>
+            <td><c:out value="${news.originallink}"/> </td>
+            <td><a href="<c:out value='${news.link}'/>" target="_blank">원문 보기</a></td>
+            <td><c:out value="${news.description}"/> </td>
+            <td><c:out value="${news.pubDate}"/> </td>
         </tr>
     </c:forEach>
     </tbody>
