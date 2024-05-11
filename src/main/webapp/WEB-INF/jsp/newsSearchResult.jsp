@@ -36,6 +36,7 @@
 <body>
 <h3>네이버 오픈 API를 활용한 뉴스 검색결과</h3>
 <a href="/news">돌아가기</a>
+<a href="/scraplist">스크랩한 기사</a>
 <table>
     <tbody>
     <c:forEach items="${newss}" var="news">

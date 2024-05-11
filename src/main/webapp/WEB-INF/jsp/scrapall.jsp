@@ -1,32 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>News</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>News Search</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th,
+        td {
+            border: 2px solid #aaa;
+            padding: 8px;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+        h2 {
+            margin: 0;
+        }
+        .description {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .pubDate {
+            font-size: 14px;
+        }
+        .link {
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-<h1>News List</h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Link</th>
-        <th>Publication Date</th>
-    </tr>
-    </thead>
+<h3>스크랩한 기사</h3>
+<a href='javascript:history.back()'>돌아가기</a>
+<table>
     <tbody>
     <c:forEach items="${newsList}" var="news">
         <tr>
-            <td>${news.id}</td>
-            <td>${news.title}</td>
-            <td>${news.description}</td>
-            <td>${news.link}</td>
-            <td>${news.pubDate}</td>
+            <td>
+                <h2>${news.title}</h2>
+                <p class="description">${news.description}</p>
+                <p class="pubDate">${news.pubDate}</p>
+                <p class="link"><a href="${news.link}" target="_blank">원문 보기</a></p>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
