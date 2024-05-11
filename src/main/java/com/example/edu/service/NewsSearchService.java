@@ -1,6 +1,6 @@
 package com.example.edu.service;
 
-import com.example.edu.model.BookInfoVO;
+import com.example.edu.model.NewsInfoVO;
 
 import java.util.List;
 import java.util.Map;
