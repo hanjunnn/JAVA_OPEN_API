@@ -42,7 +42,7 @@ public class NewsSearchController{
         apiURL.append("https://openapi.naver.com"); // url
         apiURL.append("/v1/search/news.json?");  // path
         apiURL.append("query="+keyword); // 검색어
-        apiURL.append("&display=10");  // 출력 갯수
+        apiURL.append("&display=100");  // 출력 갯수
         apiURL.append("&start=1");  // 시작 번호
         apiURL.append("&sort=sim");  // 정렬방법
 
