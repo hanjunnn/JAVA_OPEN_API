@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class NewsController{
+public class NewsSearchController{
 
-    @Resource(name = newsSearchService")
+    @Resource(name = "newsSearchService")
     private newsSearchService newsSearchService;
 
     @RequestMapping(value = "/news")
