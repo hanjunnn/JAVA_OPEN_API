@@ -18,9 +18,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'javax.servlet:jstl'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'mysql:mysql-connector-java'
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
