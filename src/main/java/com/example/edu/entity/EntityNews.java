@@ -64,4 +64,16 @@ public class EntityNews {
     public void setLink(String link) {
         this.link = link;
     }
+
+
+    @Override
+    public String toString() {
+        return "newsList{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", link='" + link + '\'' +
+                ", pubDate='" + pubDate + '\'' +
+                '}';
+    }
 }
