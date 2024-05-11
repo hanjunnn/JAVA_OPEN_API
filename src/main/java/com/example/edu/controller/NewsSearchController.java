@@ -3,10 +3,12 @@ package com.example.edu.controller;
 import com.example.edu.model.NewsInfoVO;
 import com.example.edu.service.NewsSearchService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +51,7 @@ public class NewsSearchController{
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 
-        List<newsInfoVO> newss = newsSearchService.searchnewsList(apiURL.toString(), requestHeaders);
+        List<NewsInfoVO> newss = newsSearchService.searchNewsList(apiURL.toString(), requestHeaders);
 
         System.out.println(" URL ==> "+apiURL);
         System.out.println(" 목록수 ==> "+newss.size());

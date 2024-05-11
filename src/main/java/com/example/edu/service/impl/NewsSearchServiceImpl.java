@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-@Service("NewsSearchService")
+@Service("newsSearchService")
 public class NewsSearchServiceImpl implements NewsSearchService {
 	
 	NewsInfoSearchInterface NewsSearchInterface = new NewsInfoSearchInterface();
