@@ -14,3 +14,5 @@ com/example/edu/adapter/BookInfoSearchInterface.java
  com.example.edu.adapter.BookInfoSearchInterface
 com/example/edu/controller/BookSearchController.java
  com.example.edu.controller.BookSearchController
+com/example/edu/adapter/NewsInfoSearchInterface.java
+ com.example.edu.adapter.NewsInfoSearchInterface
