@@ -10,13 +10,16 @@
             border-collapse: collapse;
             width: 100%;
         }
-        th,
         td {
-            border: 2px solid #aaa;
+            border-top: 1px solid #000;
             padding: 8px;
+            color: black;
         }
         th {
             background-color: #f8f8f8;
+        }
+        h3 {
+            text-align: center;
         }
         h2 {
             margin: 0;
@@ -31,6 +34,10 @@
         .link {
             font-size: 14px;
         }
+        a{
+            color : black;
+            text-decoration-line: none;
+        }
     </style>
 </head>
 <body>
@@ -41,10 +48,9 @@
     <c:forEach items="${newss}" var="news">
         <tr>
             <td>
-                <h2>${news.title}</h2>
+                <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
                 <p class="description">${news.description}</p>
                 <p class="pubDate">${news.pubDate}</p>
-                <p class="link"><a href="${news.link}" target="_blank">원문 보기</a></p>
             </td>
         </tr>
     </c:forEach>
