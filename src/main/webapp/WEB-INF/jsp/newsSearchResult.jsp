@@ -50,28 +50,38 @@
             justify-content: space-between; /* 버튼을 오른쪽으로 정렬 */
             margin-bottom: 10px; /* 버튼과 테이블 사이의 간격 조정 */
         }
-        .scrap {
-            margin-left: auto; /* 스크랩 버튼을 오른쪽 끝으로 이동 */
-        }
+
         .before {
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif; /* Applying 'Gowun Dodum' font family to the body */
             font-size: 18px;
             margin-top: 5%;
             border-radius: 10px;
             border: 3px solid #2e9afe;
-            color: #6e6e6e;
+            color: #2e9afe;
             width: 150px;
             height: 50px;
             background-color: white;
         }
+        .before:hover {
+            background-color: #2e9afe;
+            color: white;
+        }
         .scrap {
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif; /* Applying 'Gowun Dodum' font family to the body */
             font-size: 16px;
             margin-top: 5%;
             border-radius: 10px;
             border: 3px solid #2e9afe;
-            color: #6e6e6e;
+            color: #2e9afe;
             width: 150px;
             height: 50px;
             background-color: white;
+        }
+        .scrap:hover {
+            background-color: #2e9afe;
+            color: white;
         }
         .head {
             text-shadow: black;
@@ -148,6 +158,7 @@
             font-family: 'Font Awesome 5 Free'; /* FontAwesome 아이콘의 폰트 패밀리 설정 */
             color: gold;
         }
+
 
     </style>
     <script src="https://kit.fontawesome.com/60c313e98e.js" crossorigin="anonymous"></script>
