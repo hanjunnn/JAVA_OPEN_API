@@ -9,6 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:forEach var="news" items="${newss}">
     <div class="news-item">
+        <hr>
         <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
         <c:if test="${not empty news.originallink}">
             <img src="${news.originallink}" width="50" height="50">
