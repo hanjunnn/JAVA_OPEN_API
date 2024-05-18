@@ -1,4 +1,4 @@
-master<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -206,6 +206,7 @@ master<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
         var newItems = doc.querySelectorAll('.news-item');
         newItems.forEach(function (item) {
             container.appendChild(item);
+            window.scrollTo(0, 0);
         });
     }
 
