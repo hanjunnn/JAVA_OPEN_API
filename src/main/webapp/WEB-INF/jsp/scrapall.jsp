@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>News Search</title>
     <style>
@@ -10,9 +13,12 @@
             border-collapse: collapse;
             width: 100%;
         }
+        tbody{
+            font-family: 'Gowun Dodum', sans-serif; /* Applying 'Gowun Dodum' font family to the body */
+        }
         th,
         td {
-            border: 2px solid #aaa;
+            border-top: 3px solid #2e9afe;
             padding: 8px;
         }
         th {
@@ -31,30 +37,84 @@
         .link {
             font-size: 14px;
         }
+        h3{
+            text-shadow: black;
+            font-weight: bold;
+            margin-top: 5%;
+            text-align: center;
+            font-size: 60px;
+            color: #2e9afe;
+        }
+        .button-style {
+            font-family: 'Gowun Dodum', sans-serif; /* Applying 'Gowun Dodum' font family to the body */
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 3%;
+            border-radius: 10px;
+            border: 3px solid #2e9afe;
+            color: #2e9afe;
+            width: 150px;
+            height: 50px;
+            background-color: white;
+         }
+
+        .button-style:hover {
+            background-color: #2e9afe;
+            color: white;
+        }
+        a {
+            text-decoration: none;
+        }
+        hr {
+            border:1px solid #2e9afe;
+        }
+             /* 삭제 버튼 스타일 */
+         .delete-button {
+             font-family: 'Gowun Dodum', sans-serif;
+             font-weight: bold;
+             font-size: 16px;
+             padding: 6px 12px;
+             border: none;
+             color: red;
+             background-color: white;
+             border-radius: 10px;
+             cursor: pointer;
+             text-decoration: none; /* 링크 텍스트의 밑줄 제거 */
+         }
+
+        /* 삭제 버튼 호버 효과 */
+        .delete-button:hover {
+            background-color: red;
+            color: white;
+        }
     </style>
+
 </head>
 <body>
 <h3>스크랩한 기사</h3>
 <c:if test="${not empty sessionScope.keyword}">
-    <a href="/newssearch?keyword=${sessionScope.keyword}">돌아가기</a>
+    <button class="button-style" onclick="location.href='/newssearch?keyword=${sessionScope.keyword}'">돌아가기</button>
 </c:if>
 <c:if test="${empty sessionScope.keyword}">
-    <a href="/news">돌아가기</a>
+    <a href="/news">돌아가기</a>이재명 "검찰이 문서 짜깁기"…檢 "李, 법정 밖서 허위 주장"
 </c:if>
+<br><br><br>
+
 <table>
     <tbody>
     <c:forEach items="${newsList}" var="news">
         <tr>
             <td>
-                <h2>${news.title}</h2>
+                <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
                 <p class="description">${news.description}</p>
                 <p class="pubDate">${news.pubDate}</p>
-                <p class="link"><a href="${news.link}" target="_blank">원문 보기</a></p>
-                <a href="/delete/${news.id}">삭제</a>
+                <p class="link">
+                    <button class="delete-button" onclick="location.href='/delete/${news.id}'">삭제</button>
+                </p>
             </td>
         </tr>
     </c:forEach>
     </tbody>
-</table>
+</table><hr>
 </body>
 </html>
