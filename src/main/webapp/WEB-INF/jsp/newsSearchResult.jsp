@@ -83,6 +83,7 @@
 <br><br>
 
 
+
 <table>
     <tbody>
     <div id="newsResults">
@@ -90,20 +91,37 @@
     </div>
     </tbody>
 </table>
-
-<!-- 더보기 버튼 -->
-<button id="loadMoreButton">더보기</button>
+<div class="button-container">
+    <button type="button" id="prevPageButton" class="before">이전페이지</button>
+    <span id="currentPage" style="font-size: 18px; margin-top: 5%;">현재 페이지: 1</span>
+    <button type="button" id="nextPageButton" class="scrap">다음페이지</button>
+</div>
 
 <script>
     var currentPage = 1;
     var keyword = '<%= request.getParameter("keyword") %>';
 
-    document.getElementById('loadMoreButton').addEventListener('click', function () {
-        currentPage++;
-        loadMoreNews(currentPage);
+    document.getElementById('prevPageButton').addEventListener('click', function () {
+        currentPage--;
+        if (currentPage < 1) {
+            currentPage = 1;
+        }
+        loadNews(currentPage);
+        updateCurrentPageDisplay(currentPage);
     });
 
-    function loadMoreNews(page) {
+    document.getElementById('nextPageButton').addEventListener('click', function () {
+        currentPage++;
+        loadNews(currentPage);
+        updateCurrentPageDisplay(currentPage);
+    });
+
+    function updateCurrentPageDisplay(page) {
+        document.getElementById('currentPage').textContent = '현재 페이지: ' + page;
+    }
+
+
+    function loadNews(page) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/newssearch?keyword=' + encodeURIComponent(keyword) + '&page=' + page, true);
         xhr.onreadystatechange = function () {
@@ -112,6 +130,7 @@
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(xhr.responseText, 'text/html');
                 var newItems = doc.querySelectorAll('.news-item');
+                newsResultsContainer.innerHTML = ''; // Clear previous results
                 newItems.forEach(function (item) {
                     newsResultsContainer.appendChild(item);
                 });
@@ -123,4 +142,3 @@
 
 </body>
 </html>
-
