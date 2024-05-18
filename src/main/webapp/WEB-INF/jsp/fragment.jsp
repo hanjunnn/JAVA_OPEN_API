@@ -7,12 +7,13 @@
 --%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <c:forEach var="news" items="${newss}">
     <div class="news-item">
         <hr>
         <div class="image-container">
             <c:if test="${not empty news.originallink}">
-                <img src="${news.originallink}" alt="News Image">
+                <img src="${news.originallink}" alt="News Image" onerror="this.style.display='none';">
             </c:if>
         </div>
         <div class="news-details">
