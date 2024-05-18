@@ -89,7 +89,9 @@
         <tr>
             <td>
                 <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
-                <img src="${news.originallink}" width="50" height="50">
+                <c:if test="${not empty news.originallink}">
+                    <img src="${news.originallink}" width="50" height="50">
+                </c:if>
                 <p class="description">${news.description}</p>
                 <p class="pubDate">${news.pubDate}</p>
                 <form action="/scrap" method="post">
