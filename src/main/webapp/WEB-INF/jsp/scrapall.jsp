@@ -43,6 +43,7 @@
             font-size: 14px;
         }
         h3{
+            font-family: 'Gowun Dodum', sans-serif; /* Applying 'Gowun Dodum' font family to the body */
             text-shadow: black;
             font-weight: bold;
             margin-top: 5%;
@@ -68,6 +69,7 @@
             color: white;
         }
         a {
+            color: black;
             text-decoration: none;
         }
         hr {
@@ -107,7 +109,7 @@
     <button class="button-style" onclick="location.href='/news'">검색하기</button>
 </div>
 
-<br><br><br>
+<br><br>
 
 <table>
     <tbody>
