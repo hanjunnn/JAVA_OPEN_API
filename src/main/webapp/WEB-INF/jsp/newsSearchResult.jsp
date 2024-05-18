@@ -85,26 +85,42 @@
 
 <table>
     <tbody>
-    <c:forEach items="${newss}" var="news">
-        <tr>
-            <td>
-                <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
-                <c:if test="${not empty news.originallink}">
-                    <img src="${news.originallink}" width="50" height="50">
-                </c:if>
-                <p class="description">${news.description}</p>
-                <p class="pubDate">${news.pubDate}</p>
-                <form action="/scrap" method="post">
-                    <input type="hidden" name="title" value="${news.title}">
-                    <input type="hidden" name="description" value="${news.description}">
-                    <input type="hidden" name="pubDate" value="${news.pubDate}">
-                    <input type="hidden" name="link" value="${news.link}">
-                    <button type="submit">스크랩</button>
-                </form>
-            </td>
-        </tr>
-    </c:forEach>
+    <div id="newsResults">
+        <jsp:include page="fragment.jsp" />
+    </div>
     </tbody>
 </table>
+
+<!-- 더보기 버튼 -->
+<button id="loadMoreButton">더보기</button>
+
+<script>
+    var currentPage = 1;
+    var keyword = '<%= request.getParameter("keyword") %>';
+
+    document.getElementById('loadMoreButton').addEventListener('click', function () {
+        currentPage++;
+        loadMoreNews(currentPage);
+    });
+
+    function loadMoreNews(page) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/newssearch?keyword=' + encodeURIComponent(keyword) + '&page=' + page, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                var newsResultsContainer = document.getElementById('newsResults');
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(xhr.responseText, 'text/html');
+                var newItems = doc.querySelectorAll('.news-item');
+                newItems.forEach(function (item) {
+                    newsResultsContainer.appendChild(item);
+                });
+            }
+        };
+        xhr.send();
+    }
+</script>
+
 </body>
 </html>
+
