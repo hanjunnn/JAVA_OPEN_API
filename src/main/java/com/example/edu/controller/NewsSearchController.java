@@ -6,6 +6,7 @@ import com.example.edu.service.NewsSearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -30,10 +31,12 @@ public class NewsSearchController {
     }
 
     @RequestMapping(value = "/newssearch")
-    public String newsSearchList(String keyword, Model model, HttpSession session) throws Exception {
+    public String newsSearchList(String keyword, Model model, HttpSession session, @RequestParam(defaultValue = "1") int page) throws Exception {
         // 네이버 검색 API Client ID, Secret
         String clientId = "24eeaevkoWBXZscPslYt";
         String clientSecret = "itXPqa9N4T";
+
+        int start = (page * 10) - 9;
 
         try {
             keyword = URLEncoder.encode(keyword, "UTF-8");
@@ -45,7 +48,7 @@ public class NewsSearchController {
             apiURL.append("/v1/search/news.json?");  // path
             apiURL.append("query=" + keyword); // 검색어
             apiURL.append("&display=10");  // 출력 갯수
-            apiURL.append("&start=1");  // 시작 번호
+            apiURL.append("&start=" + start);  // 시작 번호
             apiURL.append("&sort=sim");  // 정렬방법
 
             // Header 설정

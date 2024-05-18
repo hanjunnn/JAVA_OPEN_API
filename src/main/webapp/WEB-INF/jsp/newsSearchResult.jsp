@@ -83,28 +83,62 @@
 <br><br>
 
 
+
 <table>
     <tbody>
-    <c:forEach items="${newss}" var="news">
-        <tr>
-            <td>
-                <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
-                <c:if test="${not empty news.originallink}">
-                    <img src="${news.originallink}" width="50" height="50">
-                </c:if>
-                <p class="description">${news.description}</p>
-                <p class="pubDate">${news.pubDate}</p>
-                <form action="/scrap" method="post">
-                    <input type="hidden" name="title" value="${news.title}">
-                    <input type="hidden" name="description" value="${news.description}">
-                    <input type="hidden" name="pubDate" value="${news.pubDate}">
-                    <input type="hidden" name="link" value="${news.link}">
-                    <button type="submit">스크랩</button>
-                </form>
-            </td>
-        </tr>
-    </c:forEach>
+    <div id="newsResults">
+        <jsp:include page="fragment.jsp" />
+    </div>
     </tbody>
 </table>
+<div class="button-container">
+    <button type="button" id="prevPageButton" class="before">이전페이지</button>
+    <span id="currentPage" style="font-size: 18px; margin-top: 5%;">현재 페이지: 1</span>
+    <button type="button" id="nextPageButton" class="scrap">다음페이지</button>
+</div>
+
+<script>
+    var currentPage = 1;
+    var keyword = '<%= request.getParameter("keyword") %>';
+
+    document.getElementById('prevPageButton').addEventListener('click', function () {
+        currentPage--;
+        if (currentPage < 1) {
+            currentPage = 1;
+        }
+        loadNews(currentPage);
+        updateCurrentPageDisplay(currentPage);
+    });
+
+    document.getElementById('nextPageButton').addEventListener('click', function () {
+        currentPage++;
+        loadNews(currentPage);
+        updateCurrentPageDisplay(currentPage);
+    });
+
+    function updateCurrentPageDisplay(page) {
+        document.getElementById('currentPage').textContent = '현재 페이지: ' + page;
+    }
+
+
+    function loadNews(page) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/newssearch?keyword=' + encodeURIComponent(keyword) + '&page=' + page, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                var newsResultsContainer = document.getElementById('newsResults');
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(xhr.responseText, 'text/html');
+                var newItems = doc.querySelectorAll('.news-item');
+                newsResultsContainer.innerHTML = ''; // Clear previous results
+                newItems.forEach(function (item) {
+                    newsResultsContainer.appendChild(item);
+                });
+            }
+        };
+        xhr.send();
+    }
+</script>
+
 </body>
 </html>
