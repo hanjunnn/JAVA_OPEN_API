@@ -21,7 +21,7 @@
             <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
             <p class="description">${news.description}</p>
             <p class="pubDate">${news.pubDate}</p>
-                <a class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`)">
+                <a class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`)">
                 <ion-icon name="star-outline"></ion-icon>
                 </a>
         </div>
@@ -30,7 +30,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function scrapNews(event, title, description, pubDate, link) {
+    function scrapNews(event, title, description, pubDate, link, originallink) {
         event.preventDefault(); // 기본 이벤트 동작 방지
 
         // AJAX 요청 생성
@@ -42,8 +42,8 @@
         var formData = 'title=' + encodeURIComponent(title) +
             '&description=' + encodeURIComponent(description) +
             '&pubDate=' + encodeURIComponent(pubDate) +
+            '&originallink=' + encodeURIComponent(originallink) +
             '&link=' + encodeURIComponent(link);
-            console.log(formData);
         // AJAX 요청 전송
         xhr.send(formData);
 

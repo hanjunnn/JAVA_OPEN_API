@@ -41,7 +41,8 @@ public class NewsController {
         entityNews.setTitle((String) news.get("title"));
         entityNews.setDescription((String) news.get("description"));
         entityNews.setPubDate((String) news.get("pubDate"));
-        entityNews.setLink((String) news.get("link"));
+        entityNews.setPubDate((String) news.get("pubDate"));
+        entityNews.setOriginallink((String) news.get("originallink"));
         return entityNews;
     }
 

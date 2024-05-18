@@ -9,6 +9,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>News Search</title>
     <style>
+        .image-container {
+            float: left;
+            margin-right: 20px; /* 이미지와 정보 사이 여백 조절 */
+        }
+
+        .image-container img {
+            width: 200px; /* 이미지의 너비 조절 */
+            height: auto; /* 비율에 맞게 높이 자동 조절 */
+        }
+
         .button-container {
             display: flex;
             justify-content: space-between; /* 버튼을 오른쪽으로 정렬 */
@@ -94,6 +104,29 @@
             background-color: red;
             color: white;
         }
+        .news-details {
+            overflow: hidden; /* 이미지 옆에 나오는 텍스트들이 영역을 벗어나지 않도록 설정 */
+        }
+
+        .news-details h2 {
+            margin-top: 0; /* 제목의 위쪽 여백 제거 */
+        }
+
+        .news-details p {
+            margin: 0; /* 문단의 위아래 여백 제거 */
+        }
+
+        .news-details form {
+            margin-top: 10px; /* 스크랩 버튼과의 여백 설정 */
+        }
+
+        .news-item {
+            clear: both; /* 각 뉴스 아이템마다 clear를 설정하여 이미지와 정보가 겹치지 않도록 함 */
+        }
+
+        hr {
+            border: 1px solid #2e9afe;
+        }
     </style>
 
 </head>
@@ -114,16 +147,22 @@
 <table>
     <tbody>
     <c:forEach items="${newsList}" var="news">
-        <tr>
-            <td>
-                <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
-                <p class="description">${news.description}</p>
-                <p class="pubDate">${news.pubDate}</p>
-                <p class="link">
-                    <button class="delete-button" onclick="location.href='/delete/${news.id}'">삭제</button>
-                </p>
-            </td>
-        </tr>
+    <div class="news-item">
+        <hr>
+        <div class="image-container">
+            <c:if test="${not empty news.originallink}">
+                <img src="${news.originallink}" alt="News Image" onerror="this.style.display='none';">
+            </c:if>
+        </div>
+        <div class="news-details">
+            <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
+            <p class="description">${news.description}</p>
+            <p class="pubDate">${news.pubDate}</p>
+            <p class="link">
+                <button class="delete-button" onclick="location.href='/delete/${news.id}'">삭제</button>
+            </p>
+        </div>
+    </div>
     </c:forEach>
     </tbody>
 </table><hr>

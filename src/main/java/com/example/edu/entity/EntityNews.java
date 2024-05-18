@@ -11,11 +11,20 @@ public class EntityNews {
     private String title;
     private String description;
     private String pubDate;
+    private String originallink;
     @Column(unique = true) // 유니크 제약 조건 설정
     private String link;
 
     public EntityNews() {
         // 기본 생성자
+    }
+
+    public String getOriginallink() {
+        return originallink;
+    }
+
+    public void setOriginallink(String originallink) {
+        this.originallink = originallink;
     }
 
     public EntityNews(String title, String description, String pubDate, String link) {
@@ -68,12 +77,14 @@ public class EntityNews {
 
     @Override
     public String toString() {
-        return "newsList{" +
+        return "EntityNews{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", link='" + link + '\'' +
                 ", pubDate='" + pubDate + '\'' +
+                ", originallink='" + originallink + '\'' +
+                ", link='" + link + '\'' +
                 '}';
     }
+
 }
