@@ -26,9 +26,9 @@
                 <input type="hidden" name="description" value="${news.description}">
                 <input type="hidden" name="pubDate" value="${news.pubDate}">
                 <input type="hidden" name="link" value="${news.link}">
-                <a href="#" class="scrap-button" onclick="scrapNews(event, '${news.title}', '${news.description}', '${news.pubDate}', '${news.link}')">
-                    <ion-icon name="star-outline"></ion-icon>
-                </a>
+                <button class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`)">
+                <ion-icon name="star-outline"></ion-icon>
+                </button>
             </form>
         </div>
     </div>
