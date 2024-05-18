@@ -25,4 +25,5 @@ dependencies {
     implementation 'mysql:mysql-connector-java'
     implementation 'javax.persistence:javax.persistence-api:2.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.jsoup:jsoup:1.14.2'
 }
