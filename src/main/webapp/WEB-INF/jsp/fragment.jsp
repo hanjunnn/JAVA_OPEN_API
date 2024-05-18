@@ -34,6 +34,7 @@
     </div>
 </c:forEach>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function scrapNews(event, title, description, pubDate, link) {
         event.preventDefault(); // 기본 이벤트 동작 방지
@@ -56,14 +57,30 @@
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     // 성공적으로 처리된 경우
-                    alert("뉴스가 스크랩되었습니다!");
+                    Swal.fire({
+                        icon: 'success',
+                        title: '뉴스가 스크랩되었습니다!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     // 성공 메시지를 출력한 후 페이지를 새로 고침하거나 다른 작업을 수행할 수 있습니다.
                 } else if (xhr.status === 409) {
                     // 중복된 기사인 경우
-                    alert("이미 스크랩된 기사입니다.");
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '이미 스크랩된 기사입니다.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 } else {
                     // 오류가 발생한 경우
-                    alert("스크랩에 실패했습니다. 다시 시도해주세요.");
+                    Swal.fire({
+                        icon: 'error',
+                        title: '스크랩에 실패했습니다.',
+                        text: '다시 시도해주세요.',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: '확인'
+                    });
                     // 오류 메시지를 출력한 후 사용자에게 다른 작업을 제안할 수 있습니다.
                 }
             }
