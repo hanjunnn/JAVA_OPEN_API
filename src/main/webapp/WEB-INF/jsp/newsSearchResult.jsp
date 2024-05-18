@@ -117,6 +117,7 @@
     <div id="newsResults">
         <jsp:include page="fragment.jsp" />
     </div>
+    <hr>
     </tbody>
 </table>
 <div id="pagination" class="pagination"></div>
