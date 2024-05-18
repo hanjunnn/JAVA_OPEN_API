@@ -45,6 +45,7 @@
                 <p class="description">${news.description}</p>
                 <p class="pubDate">${news.pubDate}</p>
                 <p class="link"><a href="${news.link}" target="_blank">원문 보기</a></p>
+                <a href="/delete/${news.id}">삭제</a>
             </td>
         </tr>
     </c:forEach>
