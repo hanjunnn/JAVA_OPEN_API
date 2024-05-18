@@ -3,54 +3,77 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 	<title>News Search</title>
 	<style>
 		body {
 			text-align: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			margin: 0;
+			background-color: white;
 		}
 
-		div {
-			margin-top: 30px;
+		div.title {
+			margin-bottom: 40px;
 			font-weight: bold;
-			font-size: 150px;
+			font-size: 100px;
 			color: #2E9AFE;
 		}
 
-		input[name='keyword'] {
-			vertical-align: middle; /* 세로 가운데 정렬을 위해 추가 */
-			margin-top: 100px;
-			border-radius: 20px;
-			padding: 5px;
-			width: 500px; /* 검색창의 너비를 2배로 키웁니다 */
-			height: 30px;
-			border: 1px solid #ccc;
+		.search-box {
+			display: flex;
+			align-items: center;
+			background: white;
+			border-radius: 40px;
+			padding: 10px;
+			border: 1px solid #2E9AFE;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 		}
 
-		input[type='submit'] {
-			vertical-align: middle; /* 세로 가운데 정렬을 위해 추가 */
-			margin-top: 100px;
-			border-radius: 20px;
-			width: 60px;
-			height: 40px;
-			background-color: #2E9AFE;
-			color: white;
+		.search-txt {
 			border: none;
+			background: none;
+			color: #797979;
+			font-size: 25px;
+			line-height: 30px;
+			width: 600px;
+			padding: 5px;
+			border-radius: 20px;
+			outline: none;
+		}
+
+		.search-btn {
+			color: #2E9AFE;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background: white;
+			border: none;
+			font-size: 16px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-left: 10px;
 			cursor: pointer;
 		}
 
-		table {
-			margin: auto;
+		.search-btn:hover {
+			background-color: #2E9AFE;
+			color: white;
 		}
 	</style>
+	<script src="https://kit.fontawesome.com/60c313e98e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div>News Search & Scrap</div>
-<table>
-	<form action="/newssearch">
-		<input name='keyword' type='text' required/>
-		<input type="submit" value="search">
-	</form>
-</table>
+<div class="title">Scrap It</div>
+<form class="search-box" action="/newssearch" method="get">
+	<input class="search-txt" name="keyword" type="text" required />
+	<button class="search-btn" type="submit" value="search">
+		<i class="fa-solid fa-magnifying-glass"></i>
+	</button>
+</form>
 </body>
 </html>
