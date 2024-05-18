@@ -10,18 +10,23 @@
 <c:forEach var="news" items="${newss}">
     <div class="news-item">
         <hr>
-        <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
-        <c:if test="${not empty news.originallink}">
-            <img src="${news.originallink}" width="50" height="50">
-        </c:if>
-        <p class="description">${news.description}</p>
-        <p class="pubDate">${news.pubDate}</p>
-        <form action="/scrap" method="post">
-            <input type="hidden" name="title" value="${news.title}">
-            <input type="hidden" name="description" value="${news.description}">
-            <input type="hidden" name="pubDate" value="${news.pubDate}">
-            <input type="hidden" name="link" value="${news.link}">
-            <button type="submit">스크랩</button>
-        </form>
+        <div class="image-container">
+            <c:if test="${not empty news.originallink}">
+                <img src="${news.originallink}" alt="News Image">
+            </c:if>
+        </div>
+        <div class="news-details">
+            <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
+            <p class="description">${news.description}</p>
+            <p class="pubDate">${news.pubDate}</p>
+            <form action="/scrap" method="post">
+                <input type="hidden" name="title" value="${news.title}">
+                <input type="hidden" name="description" value="${news.description}">
+                <input type="hidden" name="pubDate" value="${news.pubDate}">
+                <input type="hidden" name="link" value="${news.link}">
+                <button type="submit">스크랩</button>
+            </form>
+        </div>
     </div>
 </c:forEach>
+
