@@ -28,12 +28,15 @@ public class NewsController {
         Optional<EntityNews> existingNews = newsRepository.findByLink(link);
 
         if (existingNews.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 스크랩된 기사입니다." + "<br><a href='javascript:history.back()'>뒤로가기</a>");
+            String responseBody = "이미 스크랩된 기사입니다." + "<br>잠시 후 자동으로 뒤로 가기됩니다.";
+            responseBody += "<script>setTimeout(function() { history.back(); }, 2000);</script>"; // 2초 후에 뒤로가기
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(responseBody);
         }
-
         EntityNews entityNews = mapToEntity(news);
         newsRepository.save(entityNews);
-        return ResponseEntity.status(HttpStatus.OK).body("스크랩 되었습니다!" + "<br><a href='javascript:history.back()'>뒤로가기</a>");
+        String responseBody = "스크랩 되었습니다!" + "<br>잠시 후 자동으로 뒤로 가기됩니다.";
+        responseBody += "<script>setTimeout(function() { history.back(); }, 1500);</script>"; // 2초 후에 뒤로가기
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
     private EntityNews mapToEntity(Map<String, Object> news) {
@@ -44,4 +47,5 @@ public class NewsController {
         entityNews.setLink((String) news.get("link"));
         return entityNews;
     }
+
 }
