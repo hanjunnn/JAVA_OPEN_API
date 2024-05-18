@@ -133,16 +133,31 @@
         hr {
             border: 1px solid #2e9afe;
         }
-
+        .star {
+            font-family: 'Gowun Dodum';
+            display: flex;
+            align-items: center;
+        }
+        .star .fa-star {
+            font-family: 'Font Awesome 5 Free'; /* FontAwesome 아이콘의 폰트 패밀리 설정 */
+            color: #2e9afe;
+            font-size: 24px;
+            margin-left: 5px; /* 별 아이콘과 제목 사이 간격 조정 */
+        }
+        .star.clicked .fa-star {
+            font-family: 'Font Awesome 5 Free'; /* FontAwesome 아이콘의 폰트 패밀리 설정 */
+            color: gold;
+        }
 
     </style>
+    <script src="https://kit.fontawesome.com/60c313e98e.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 <div class = "head">Search Results</div>
 <div class="button-container">
-    <button type="button" onclick="location.href='/news'" class="before"><<< Prev</button>
-    <button type="button" onclick="location.href='/scraplist'"class="scrap">View Scraps</button>
+    <button type="button" onclick="location.href='/news'" class="before">돌아가기</button>
+    <button type="button" onclick="location.href='/scraplist'"class="scrap">스크랩한 기사</button>
 </div>
 <br>
 
