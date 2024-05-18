@@ -11,6 +11,8 @@ import com.example.edu.entity.EntityNews;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
+
 
 
 @RestController
@@ -19,12 +21,19 @@ public class NewsController {
     @Autowired
     private NewsRepository newsRepository;
 
+
     @PostMapping("/scrap")
-    //@ResponseBody
-    public ResponseEntity<String> scrapNews(@RequestParam Map<String,Object> news, HttpServletResponse response) throws IOException {
+    public ResponseEntity<String> scrapNews(@RequestParam Map<String, Object> news, HttpServletResponse response) throws IOException {
+        String link = (String) news.get("link");
+        Optional<EntityNews> existingNews = newsRepository.findByLink(link);
+
+        if (existingNews.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 스크랩된 기사입니다." + "<br><a href='javascript:history.back()'>뒤로가기</a>");
+        }
+
         EntityNews entityNews = mapToEntity(news);
         newsRepository.save(entityNews);
-        return ResponseEntity.status(HttpStatus.OK).body("스크랩 되었습니다!"+"<br><a href='javascript:history.back()'>뒤로가기</a>");
+        return ResponseEntity.status(HttpStatus.OK).body("스크랩 되었습니다!" + "<br><a href='javascript:history.back()'>뒤로가기</a>");
     }
 
     private EntityNews mapToEntity(Map<String, Object> news) {
