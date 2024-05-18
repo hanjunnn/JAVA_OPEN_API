@@ -9,6 +9,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>News Search</title>
     <style>
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* 버튼을 오른쪽으로 정렬 */
+            margin-bottom: 10px; /* 버튼과 테이블 사이의 간격 조정 */
+        }
         table {
             border-collapse: collapse;
             width: 100%;
@@ -92,12 +97,16 @@
 </head>
 <body>
 <h3>스크랩한 기사</h3>
-<c:if test="${not empty sessionScope.keyword}">
-    <button class="button-style" onclick="location.href='/newssearch?keyword=${sessionScope.keyword}'">돌아가기</button>
-</c:if>
-<c:if test="${empty sessionScope.keyword}">
-    <a href="/news">돌아가기</a>이재명 "검찰이 문서 짜깁기"…檢 "李, 법정 밖서 허위 주장"
-</c:if>
+<div class="button-container">
+    <c:if test="${not empty sessionScope.keyword}">
+        <button class="button-style" onclick="location.href='/newssearch?keyword=${sessionScope.keyword}'">돌아가기</button>
+    </c:if>
+    <c:if test="${empty sessionScope.keyword}">
+        <a href="/news">돌아가기</a>이재명 "검찰이 문서 짜깁기"…檢 "李, 법정 밖서 허위 주장"
+    </c:if>
+    <button class="button-style" onclick="location.href='/news'">검색하기</button>
+</div>
+
 <br><br><br>
 
 <table>
