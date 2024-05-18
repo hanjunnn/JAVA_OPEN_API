@@ -2,10 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>News Search</title>
 	<style>
 		body {
+
 			text-align: center;
 			display: flex;
 			flex-direction: column;
@@ -17,6 +21,7 @@
 		}
 
 		div.title {
+			font-family: 'Gowun Dodum';
 			margin-bottom: 40px;
 			font-weight: bold;
 			font-size: 100px;
@@ -68,7 +73,7 @@
 	<script src="https://kit.fontawesome.com/60c313e98e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="title">Scrap It</div>
+<div class="title">Scrap It.</div>
 <form class="search-box" action="/newssearch" method="get">
 	<input class="search-txt" name="keyword" type="text" required />
 	<button class="search-btn" type="submit" value="search">
