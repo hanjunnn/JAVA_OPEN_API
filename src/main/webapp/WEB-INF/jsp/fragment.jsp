@@ -21,15 +21,9 @@
             <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
             <p class="description">${news.description}</p>
             <p class="pubDate">${news.pubDate}</p>
-            <form action="/scrap" method="post">
-                <input type="hidden" name="title" value="${news.title}">
-                <input type="hidden" name="description" value="${news.description}">
-                <input type="hidden" name="pubDate" value="${news.pubDate}">
-                <input type="hidden" name="link" value="${news.link}">
-                <button class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`)">
+                <a class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`)">
                 <ion-icon name="star-outline"></ion-icon>
-                </button>
-            </form>
+                </a>
         </div>
     </div>
 </c:forEach>
@@ -49,7 +43,7 @@
             '&description=' + encodeURIComponent(description) +
             '&pubDate=' + encodeURIComponent(pubDate) +
             '&link=' + encodeURIComponent(link);
-
+            console.log(formData);
         // AJAX 요청 전송
         xhr.send(formData);
 
