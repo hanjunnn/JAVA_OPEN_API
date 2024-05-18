@@ -100,6 +100,41 @@
             background-color: #2e9afe;
             color: white;
         }
+        .image-container {
+            float: left;
+            margin-right: 20px; /* 이미지와 정보 사이 여백 조절 */
+        }
+
+        .image-container img {
+            width: 200px; /* 이미지의 너비 조절 */
+            height: auto; /* 비율에 맞게 높이 자동 조절 */
+        }
+
+        .news-details {
+            overflow: hidden; /* 이미지 옆에 나오는 텍스트들이 영역을 벗어나지 않도록 설정 */
+        }
+
+        .news-details h2 {
+            margin-top: 0; /* 제목의 위쪽 여백 제거 */
+        }
+
+        .news-details p {
+            margin: 0; /* 문단의 위아래 여백 제거 */
+        }
+
+        .news-details form {
+            margin-top: 10px; /* 스크랩 버튼과의 여백 설정 */
+        }
+
+        .news-item {
+            clear: both; /* 각 뉴스 아이템마다 clear를 설정하여 이미지와 정보가 겹치지 않도록 함 */
+        }
+
+        hr {
+            border: 1px solid #2e9afe;
+        }
+
+
     </style>
 </head>
 
@@ -109,7 +144,7 @@
     <button type="button" onclick="location.href='/news'" class="before"><<< Prev</button>
     <button type="button" onclick="location.href='/scraplist'"class="scrap">View Scraps</button>
 </div>
-<br><br>
+<br>
 
 
 <table>
