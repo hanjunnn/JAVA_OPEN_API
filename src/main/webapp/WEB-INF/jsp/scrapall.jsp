@@ -127,6 +127,42 @@
         hr {
             border: 1px solid #2e9afe;
         }
+        hr {
+            border:1px solid #2e9afe;
+        }
+
+        body {
+            font-family: 'Gowun Dodum', sans-serif; /* Applying 'Gowun Dodum' font family to the body */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            border-top: 2px solid #2e9afe;
+            padding: 8px;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+        h2 {
+            margin: 0;
+        }
+        .description {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .pubDate {
+            font-size: 14px;
+        }
+        .link {
+            font-size: 14px;
+        }
+        a {
+            color: darkblue;
+            text-decoration-line: none;
+        }
     </style>
 
 </head>
