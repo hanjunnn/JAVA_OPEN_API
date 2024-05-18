@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+master<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -71,6 +71,25 @@
             font-size: 70px;
             color: #2e9afe;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            border: 1px solid #2e9afe;
+            border-radius: 5px;
+            background-color: white;
+            color: #2e9afe;
+            cursor: pointer;
+        }
+        .pagination button.active {
+            background-color: #2e9afe;
+            color: white;
+        }
     </style>
 </head>
 
@@ -83,7 +102,6 @@
 <br><br>
 
 
-
 <table>
     <tbody>
     <div id="newsResults">
@@ -91,54 +109,114 @@
     </div>
     </tbody>
 </table>
-<div class="button-container">
-    <button type="button" id="prevPageButton" class="before">이전페이지</button>
-    <span id="currentPage" style="font-size: 18px; margin-top: 5%;">현재 페이지: 1</span>
-    <button type="button" id="nextPageButton" class="scrap">다음페이지</button>
-</div>
+<div id="pagination" class="pagination"></div>
 
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script>
-    var currentPage = 1;
+    const numOfContent = 1000;
+    const maxContent = 10;
+    const maxButton = 10;
+    const maxPage = Math.ceil(numOfContent / maxContent);
+    let page = 1;
+
+    const buttons = document.getElementById('pagination');
+
+    const makeButton = (id) => {
+        const button = document.createElement("button");
+        button.classList.add("button");
+        button.dataset.num = id;
+        button.innerText = id;
+        button.addEventListener("click", (e) => {
+            Array.prototype.forEach.call(buttons.children, (button) => {
+                if (button.dataset.num) button.classList.remove("active");
+            });
+            e.target.classList.add("active");
+            loadPage(parseInt(e.target.dataset.num));
+        });
+        return button;
+    };
+
+    const renderButton = (page) => {
+        // 버튼 리스트 초기화
+        while (buttons.hasChildNodes()) {
+            buttons.removeChild(buttons.lastChild);
+        }
+        // 화면에 최대 5개의 페이지 버튼 생성
+        for (let id = page; id < page + maxButton && id <= maxPage; id++) {
+            buttons.appendChild(makeButton(id));
+        }
+        // 첫 버튼 활성화(class="active")
+        if (buttons.children[0]) {
+            buttons.children[0].classList.add("active");
+        }
+
+        buttons.prepend(prev);
+        buttons.append(next);
+
+        // 이전, 다음 페이지 버튼이 필요한지 체크
+        if (page - maxButton < 1) buttons.removeChild(prev);
+        if (page + maxButton > maxPage) buttons.removeChild(next);
+    };
+
+    const goPrevPage = () => {
+        page -= maxButton;
+        render(page);
+    };
+
+    const goNextPage = () => {
+        page += maxButton;
+        render(page);
+    };
+
+    const prev = document.createElement("button");
+    prev.classList.add("button", "prev");
+    prev.innerHTML = '<ion-icon name="chevron-back-outline"></ion-icon>';
+    prev.addEventListener("click", goPrevPage);
+
+    const next = document.createElement("button");
+    next.classList.add("button", "next");
+    next.innerHTML = '<ion-icon name="chevron-forward-outline"></ion-icon>';
+    next.addEventListener("click", goNextPage);
+
     var keyword = '<%= request.getParameter("keyword") %>';
 
-    document.getElementById('prevPageButton').addEventListener('click', function () {
-        currentPage--;
-        if (currentPage < 1) {
-            currentPage = 1;
-        }
-        loadNews(currentPage);
-        updateCurrentPageDisplay(currentPage);
-    });
-
-    document.getElementById('nextPageButton').addEventListener('click', function () {
-        currentPage++;
-        loadNews(currentPage);
-        updateCurrentPageDisplay(currentPage);
-    });
-
-    function updateCurrentPageDisplay(page) {
-        document.getElementById('currentPage').textContent = '현재 페이지: ' + page;
-    }
-
-
-    function loadNews(page) {
+    function loadPage(page) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', '/newssearch?keyword=' + encodeURIComponent(keyword) + '&page=' + page, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 var newsResultsContainer = document.getElementById('newsResults');
-                var parser = new DOMParser();
-                var doc = parser.parseFromString(xhr.responseText, 'text/html');
-                var newItems = doc.querySelectorAll('.news-item');
-                newsResultsContainer.innerHTML = ''; // Clear previous results
-                newItems.forEach(function (item) {
-                    newsResultsContainer.appendChild(item);
-                });
+                renderContent(xhr.responseText, newsResultsContainer);
+
+                // 페이지 버튼 활성화 상태 업데이트
+                var activeButton = document.querySelector(`.button[data-num="${page}"]`);
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
             }
         };
         xhr.send();
     }
+
+    function renderContent(content, container) {
+        container.innerHTML = ''; // 기존 내용을 지웁니다.
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(content, 'text/html');
+        var newItems = doc.querySelectorAll('.news-item');
+        newItems.forEach(function (item) {
+            container.appendChild(item);
+        });
+    }
+
+    const render = (page) => {
+        loadPage(page);
+        renderButton(page);
+    };
+
+    render(page);
 </script>
 
 </body>
 </html>
+
