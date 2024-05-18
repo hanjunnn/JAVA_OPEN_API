@@ -58,14 +58,14 @@
             font-weight: bold;
             margin-top: 5%;
             text-align: center;
-            font-size: 60px;
+            font-size: 70px;
             color: #2e9afe;
         }
         .button-style {
             font-family: 'Gowun Dodum', sans-serif; /* Applying 'Gowun Dodum' font family to the body */
             font-weight: bold;
             font-size: 18px;
-            margin-top: 3%;
+            margin-top: 1px;
             border-radius: 10px;
             border: 3px solid #2e9afe;
             color: #2e9afe;
@@ -167,18 +167,18 @@
 
 </head>
 <body>
-<h3>스크랩한 기사</h3>
+<h3>Scraped News</h3>
 <div class="button-container">
     <c:if test="${not empty sessionScope.keyword}">
         <button class="button-style" onclick="location.href='/newssearch?keyword=${sessionScope.keyword}'">돌아가기</button>
     </c:if>
     <c:if test="${empty sessionScope.keyword}">
-        <a href="/news">돌아가기</a>이재명 "검찰이 문서 짜깁기"…檢 "李, 법정 밖서 허위 주장"
+        <a href="/news">돌아가기</a>
     </c:if>
     <button class="button-style" onclick="location.href='/news'">검색하기</button>
 </div>
 
-<br><br>
+<br>
 
 <table>
     <tbody>
