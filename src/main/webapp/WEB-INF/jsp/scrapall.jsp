@@ -28,7 +28,7 @@
             border-collapse: collapse;
             width: 100%;
         }
-        tbody{
+        body{
             font-family: 'Gowun Dodum', sans-serif; /* Applying 'Gowun Dodum' font family to the body */
         }
         th,
