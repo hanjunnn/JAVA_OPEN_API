@@ -35,7 +35,12 @@
 </head>
 <body>
 <h3>스크랩한 기사</h3>
-<a href='javascript:history.back()'>돌아가기</a>
+<c:if test="${not empty sessionScope.keyword}">
+    <a href="/newssearch?keyword=${sessionScope.keyword}">돌아가기</a>
+</c:if>
+<c:if test="${empty sessionScope.keyword}">
+    <a href="/news">돌아가기</a>
+</c:if>
 <table>
     <tbody>
     <c:forEach items="${newsList}" var="news">
