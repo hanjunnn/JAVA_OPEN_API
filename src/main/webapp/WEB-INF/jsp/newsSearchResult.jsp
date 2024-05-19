@@ -144,21 +144,12 @@
             border: 1px solid #2e9afe;
         }
         .star {
-            font-family: 'Gowun Dodum';
+            font-family: 'Font Awesome 5 Free';
             display: flex;
             align-items: center;
-        }
-        .star .fa-star {
-            font-family: 'Font Awesome 5 Free'; /* FontAwesome 아이콘의 폰트 패밀리 설정 */
-            color: #2e9afe;
             font-size: 24px;
-            margin-left: 5px; /* 별 아이콘과 제목 사이 간격 조정 */
+            color: #2e9afe;
         }
-        .star.clicked .fa-star {
-            font-family: 'Font Awesome 5 Free'; /* FontAwesome 아이콘의 폰트 패밀리 설정 */
-            color: gold;
-        }
-
 
     </style>
     <script src="https://kit.fontawesome.com/60c313e98e.js" crossorigin="anonymous"></script>
@@ -178,9 +169,9 @@
     <div id="newsResults">
         <jsp:include page="fragment.jsp" />
     </div>
-    <hr>
     </tbody>
 </table>
+<hr>
 <div id="pagination" class="pagination"></div>
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -204,6 +195,7 @@
                 if (button.dataset.num) button.classList.remove("active");
             });
             e.target.classList.add("active");
+
             loadPage(parseInt(e.target.dataset.num));
         });
         return button;
@@ -259,6 +251,8 @@
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 var newsResultsContainer = document.getElementById('newsResults');
+
+                newsResultsContainer.innerHTML = "";
                 renderContent(xhr.responseText, newsResultsContainer);
 
                 // 페이지 버튼 활성화 상태 업데이트
@@ -272,7 +266,7 @@
     }
 
     function renderContent(content, container) {
-        container.innerHTML = ''; // 기존 내용을 지웁니다.
+
         var parser = new DOMParser();
         var doc = parser.parseFromString(content, 'text/html');
         var newItems = doc.querySelectorAll('.news-item');
@@ -282,14 +276,16 @@
         });
     }
 
-    const render = (page) => {
-        loadPage(page);
+    /처음로드시에는 loadPage 실행 안 함
+    const render = (page, callLoadPage = true) => {
+        if (callLoadPage) {
+            loadPage(page);
+        }
         renderButton(page);
     };
 
-    render(page);
+    // 초기 렌더링 시에는 callLoadPage를 false로 설정
+    render(page, false);
 </script>
-
 </body>
 </html>
-

@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <c:forEach var="news" items="${newss}">
     <div class="news-item">
@@ -21,17 +21,33 @@
             <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
             <p class="description">${news.description}</p>
             <p class="pubDate">${news.pubDate}</p>
-                <a class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`)">
-                <ion-icon name="star-outline"></ion-icon>
-                </a>
+            <c:choose>
+                <c:when test="${fn:contains(links, news.link)}">
+                    <a class="scrap-button active" onclick="scrapNews(event, '${news.title}', '${news.description}', '${news.pubDate}', '${news.link}', '${news.originallink}')">
+                        <ion-icon name="star"></ion-icon>
+                    </a>
+                </c:when>
+                <c:otherwise>
+                    <a class="scrap-button" onclick="scrapNews(event, '${news.title}', '${news.description}', '${news.pubDate}', '${news.link}', '${news.originallink}')">
+                        <ion-icon name="star-outline"></ion-icon>
+                    </a>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </c:forEach>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function scrapNews(event, title, description, pubDate, link, originallink) {
         event.preventDefault(); // 기본 이벤트 동작 방지
+        var scrapButton = event.currentTarget;
+        var ionIcon = scrapButton.querySelector('ion-icon');
+        if (ionIcon) {
+            ionIcon.setAttribute('name', 'star');
+            scrapButton.classList.add('active');
+        }
 
         // AJAX 요청 생성
         var xhr = new XMLHttpRequest();
@@ -57,7 +73,6 @@
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    // 성공 메시지를 출력한 후 페이지를 새로 고침하거나 다른 작업을 수행할 수 있습니다.
                 } else if (xhr.status === 409) {
                     // 중복된 기사인 경우
                     Swal.fire({
@@ -75,7 +90,6 @@
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: '확인'
                     });
-                    // 오류 메시지를 출력한 후 사용자에게 다른 작업을 제안할 수 있습니다.
                 }
             }
         };
