@@ -8,3 +8,5 @@ import java.util.Optional;
 public interface NewsRepository extends JpaRepository<EntityNews, Long> {
     Optional<EntityNews> findByLink(String link);
 }
+
+

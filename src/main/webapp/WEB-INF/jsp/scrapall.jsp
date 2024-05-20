@@ -217,7 +217,6 @@
                     location.href = '/delete/' + newsId;
                 });
             }
-
         });
     }
 </script>

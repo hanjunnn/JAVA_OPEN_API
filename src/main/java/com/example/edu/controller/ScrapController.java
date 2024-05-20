@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.edu.repository.NewsRepository;
 import com.example.edu.entity.EntityNews;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class ScrapController {
@@ -30,4 +33,5 @@ public class ScrapController {
         newsRepository.deleteById(id);
         return "redirect:/scraplist";
     }
+
 }

@@ -77,10 +77,22 @@
                 } else if (xhr.status === 409) {
                     // 중복된 기사인 경우
                     Swal.fire({
-                        icon: 'warning',
-                        title: '이미 스크랩된 기사입니다.',
-                        showConfirmButton: false,
-                        timer: 1500
+                        title: "스크랩을 삭제 하시겠습니까?",
+                        showDenyButton: true,
+                        icon: "warning",
+                        confirmButtonText: "삭제",
+                        denyButtonText: `취소`
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: "삭제되었습니다",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                location.href = '/deletescrap?link=' + link;
+                            });
+                        }
                     });
                 } else {
                     // 오류가 발생한 경우

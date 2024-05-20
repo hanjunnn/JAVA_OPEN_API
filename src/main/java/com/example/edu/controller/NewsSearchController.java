@@ -8,10 +8,13 @@
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RequestParam;
 
     import javax.annotation.Resource;
+    import javax.servlet.http.HttpServletRequest;
     import javax.servlet.http.HttpSession;
     import java.net.URLEncoder;
     import java.util.*;
@@ -33,6 +36,20 @@
         @RequestMapping(value = "/news")
         public String newsSearchPage() throws Exception {
             return "news";
+        }
+
+        //newsSearchResult에서 작동
+        @GetMapping("/deletescrap")
+        public String deleteNews(@RequestParam("link") String link,  HttpServletRequest request) {
+            Optional<EntityNews> newsToDelete  = newsRepository.findByLink(link);
+            newsToDelete .ifPresent(existingNews -> newsRepository.delete(existingNews));
+            String referer = request.getHeader("Referer");
+            if (referer != null && !referer.isEmpty()) {
+                return "redirect:" + referer;
+            } else {
+                // 이전 페이지의 URL이 없는 경우에는 기본적으로 홈페이지로 리다이렉트합니다.
+                return "redirect:/";
+            }
         }
 
         @RequestMapping(value = "/newssearch")
