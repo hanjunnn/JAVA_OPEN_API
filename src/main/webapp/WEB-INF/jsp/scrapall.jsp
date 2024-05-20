@@ -195,12 +195,31 @@
             <p class="description">${news.description}</p>
             <p class="pubDate">${news.pubDate}</p>
             <p class="link">
-                <button class="delete-button" onclick="location.href='/delete/${news.id}'">삭제</button>
+                <button class="delete-button" onclick="deleteNews(`${news.id}`)">삭제</button>
             </p>
         </div>
     </div>
     </c:forEach>
     </tbody>
 </table><hr>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function deleteNews(newsId) {
+        Swal.fire({
+            title: "정말로 삭제 하시겠습니까?",
+            showDenyButton: true,
+            icon: "warning",
+            confirmButtonText: "삭제",
+            denyButtonText: `취소`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("삭제되었습니다", "", "success").then(() => {
+                    location.href = '/delete/' + newsId;
+                });
+            }
+
+        });
+    }
+</script>
 </body>
 </html>
