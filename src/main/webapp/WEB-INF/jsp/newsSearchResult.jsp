@@ -143,10 +143,8 @@
         hr {
             border: 1px solid #2e9afe;
         }
-        .star {
-            font-family: 'Font Awesome 5 Free';
-            display: flex;
-            align-items: center;
+
+        .scrap-button {
             font-size: 24px;
             color: #2e9afe;
         }
@@ -276,7 +274,7 @@
         });
     }
 
-    /처음로드시에는 loadPage 실행 안 함
+    //처음로드시에는 loadPage 실행 안 함
     const render = (page, callLoadPage = true) => {
         if (callLoadPage) {
             loadPage(page);

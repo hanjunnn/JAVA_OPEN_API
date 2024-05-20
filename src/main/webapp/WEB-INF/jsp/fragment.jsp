@@ -18,21 +18,22 @@
             </c:if>
         </div>
         <div class="news-details">
-            <h2><a href="${news.link}" target="_blank">${news.title}</a></h2>
+            <h2><a href="${news.link}" target="_blank">${news.title}</a>
+                <c:choose>
+                    <c:when test="${fn:contains(links, news.link)}">
+                        <a class="scrap-button active" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`)">
+                            <ion-icon name="star"></ion-icon>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`)">
+                            <ion-icon name="star-outline"></ion-icon>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </h2>
             <p class="description">${news.description}</p>
             <p class="pubDate">${news.pubDate}</p>
-            <c:choose>
-                <c:when test="${fn:contains(links, news.link)}">
-                    <a class="scrap-button active" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`)">
-                        <ion-icon name="star"></ion-icon>
-                    </a>
-                </c:when>
-                <c:otherwise>
-                    <a class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`)">
-                        <ion-icon name="star-outline"></ion-icon>
-                    </a>
-                </c:otherwise>
-            </c:choose>
         </div>
     </div>
 </c:forEach>
