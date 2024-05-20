@@ -23,7 +23,7 @@
             <p class="pubDate">${news.pubDate}</p>
             <c:choose>
                 <c:when test="${fn:contains(links, news.link)}">
-                    <a class="scrap-button active">
+                    <a class="scrap-button active" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`)">
                         <ion-icon name="star"></ion-icon>
                     </a>
                 </c:when>
