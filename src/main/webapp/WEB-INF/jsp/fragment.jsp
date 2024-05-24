@@ -21,12 +21,12 @@
             <h2><a href="${news.link}" target="_blank">${news.title}</a>
                 <c:choose>
                     <c:when test="${fn:contains(links, news.link)}">
-                        <a class="scrap-button active" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`)">
+                        <a class="scrap-button active" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`, `${page}`)">
                             <ion-icon name="star"></ion-icon>
                         </a>
                     </c:when>
                     <c:otherwise>
-                        <a class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`)">
+                        <a class="scrap-button" onclick="scrapNews(event, `${news.title}`, `${news.description}`, `${news.pubDate}`, `${news.link}`, `${news.originallink}`, `${page}`)">
                             <ion-icon name="star-outline"></ion-icon>
                         </a>
                     </c:otherwise>
@@ -41,7 +41,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function scrapNews(event, title, description, pubDate, link, originallink) {
+    function scrapNews(event, title, description, pubDate, link, originallink, page) {
+
         event.preventDefault(); // 기본 이벤트 동작 방지
         var scrapButton = event.currentTarget;
         var ionIcon = scrapButton.querySelector('ion-icon');
@@ -90,7 +91,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(() => {
-                                location.href = '/deletescrap?link=' + link;
+                                location.href = '/deletescrap?link=' + link + '&page=' + page;
                             });
                         }
                     });

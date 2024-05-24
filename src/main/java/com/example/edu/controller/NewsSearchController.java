@@ -9,7 +9,6 @@
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.web.bind.annotation.GetMapping;
-    import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RequestParam;
 
@@ -40,12 +39,13 @@
 
         //newsSearchResult에서 작동
         @GetMapping("/deletescrap")
-        public String deleteNews(@RequestParam("link") String link,  HttpServletRequest request) {
+        public String deleteNews(@RequestParam("link") String link, String page,  HttpServletRequest request) {
             Optional<EntityNews> newsToDelete  = newsRepository.findByLink(link);
             newsToDelete .ifPresent(existingNews -> newsRepository.delete(existingNews));
             String referer = request.getHeader("Referer");
             if (referer != null && !referer.isEmpty()) {
-                return "redirect:" + referer;
+                String newUrl = referer.replaceAll("&?page=\\d+", "");
+                return "redirect:" + newUrl + "&page=" + page;
             } else {
                 // 이전 페이지의 URL이 없는 경우에는 기본적으로 홈페이지로 리다이렉트합니다.
                 return "redirect:/";
@@ -57,6 +57,8 @@
             // 네이버 검색 API Client ID, Secret
             String clientId = "24eeaevkoWBXZscPslYt";
             String clientSecret = "itXPqa9N4T";
+
+            model.addAttribute("page", page);
 
             int start = (page * 10) - 9;
             

@@ -179,7 +179,7 @@
     const maxContent = 10;
     const maxButton = 10;
     const maxPage = Math.ceil(numOfContent / maxContent);
-    let page = 1;
+    let page = ${page};
 
     const buttons = document.getElementById('pagination');
 
@@ -204,13 +204,18 @@
         while (buttons.hasChildNodes()) {
             buttons.removeChild(buttons.lastChild);
         }
-        // 화면에 최대 5개의 페이지 버튼 생성
-        for (let id = page; id < page + maxButton && id <= maxPage; id++) {
-            buttons.appendChild(makeButton(id));
-        }
-        // 첫 버튼 활성화(class="active")
-        if (buttons.children[0]) {
-            buttons.children[0].classList.add("active");
+
+        // 시작 페이지 계산
+        const startingPage = calculateStartingNumber(page);
+
+        // 화면에 최대 10개의 페이지 버튼 생성
+        for (let id = startingPage; id < startingPage + maxButton && id <= maxPage; id++) {
+            const button = makeButton(id);
+            // 현재 페이지와 일치하는 버튼에 활성화 클래스 추가
+            if (id === page) {
+                button.classList.add("active");
+            }
+            buttons.appendChild(button);
         }
 
         buttons.prepend(prev);
@@ -222,12 +227,12 @@
     };
 
     const goPrevPage = () => {
-        page -= maxButton;
+        page = calculateStartingNumber(page - maxButton) + 9;
         render(page);
     };
 
     const goNextPage = () => {
-        page += maxButton;
+        page = calculateStartingNumber(page + maxButton);
         render(page);
     };
 
@@ -252,12 +257,6 @@
 
                 newsResultsContainer.innerHTML = "";
                 renderContent(xhr.responseText, newsResultsContainer);
-
-                // 페이지 버튼 활성화 상태 업데이트
-                var activeButton = document.querySelector(`.button[data-num="${page}"]`);
-                if (activeButton) {
-                    activeButton.classList.add('active');
-                }
             }
         };
         xhr.send();
@@ -280,6 +279,11 @@
             loadPage(page);
         }
         renderButton(page);
+    };
+
+    //숫자 1번대가 나오도록 하는 계산식
+    const calculateStartingNumber = (page) => {
+        return Math.floor((page - 1) / maxButton) * maxButton + 1;
     };
 
     // 초기 렌더링 시에는 callLoadPage를 false로 설정
